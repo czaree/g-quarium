@@ -1,0 +1,19 @@
+# Local development: software encode, sample music, live code mount.
+services:
+  q-quarium:
+    build:
+      context: .
+      args:
+        GIT_SHA: dev
+    ports:
+      - '8080:8080'
+    environment:
+      - ENCODER=software
+      - SCENE=static
+      - IDLE_GRACE_S=10
+      - LOG_LEVEL=debug
+    volumes:
+      - ./samples/music:/music:ro
+      - ./config:/config
+      - ./assets:/assets
+      - ./app:/srv/app:ro   # edit app code without rebuilding (restart the container to apply)

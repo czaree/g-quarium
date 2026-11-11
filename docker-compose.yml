@@ -1,0 +1,25 @@
+# Server deployment: pulls the image published by CI.
+# Replace OWNER with your lowercase GitHub username. Set RENDER_GID in a .env file
+# next to this file (find it with: getent group render).
+services:
+  g-quarium:
+    image: ghcr.io/czaree/g-quarium:latest
+    container_name: g-quarium
+    restart: unless-stopped
+    ports:
+      - '8080:8080'
+    devices:
+      - /dev/dri:/dev/dri
+    group_add:
+      - '${RENDER_GID}'
+    environment:
+      - ENCODER=vaapi
+      - SCENE=static
+      - IDLE_GRACE_S=30
+      - NOW_PLAYING_DELAY_S=5
+    volumes:
+      - /media/jellyfin/Music:/music:ro
+      - ./config:/config
+      - ./assets:/assets
+    # If Jellyfin shares a Docker network with this service, add it here so the
+    # M3U can use http://g-quarium:8080 instead of the host IP.
