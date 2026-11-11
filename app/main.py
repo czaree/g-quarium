@@ -19,7 +19,7 @@ def get_version() -> str:
     return os.environ.get("APP_VERSION", "dev")[:7]
 
 
-async def health_payload() -> dict:
+def health_payload() -> dict:
     """
     reports the service's health. only fails if the process/HTTP server is down.
 

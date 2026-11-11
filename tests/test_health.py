@@ -17,7 +17,7 @@ def base_url():
     server.server_close()
 
 
-async def test_health_reports_ok_and_version(base_url, monkeypatch):
+def test_health_reports_ok_and_version(base_url, monkeypatch):
     """
     validate that /health endpoint returns success and git SHA
     """
