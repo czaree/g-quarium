@@ -1,0 +1,11 @@
+# Copy to config/sources.yml (gitignored) and edit.
+# Paths are as seen from INSIDE the container (the music library is mounted at /music).
+music_root: /music
+include:
+  - /music/Some Artist                 # whole artist
+  - /music/Another Artist/Album One    # a single album
+  - /music/Chill Compilation           # a flat folder of mp3s
+exclude:
+  - /music/Some Artist/Live Bootleg
+  - '**/*Intro*.mp3'
+extensions: [mp3, flac, ogg, m4a, opus]
