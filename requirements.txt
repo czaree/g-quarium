@@ -1,5 +1,5 @@
-aiohttp==3.14.5
-mutagen==1.48.1
-numpy==2.5.4
-pillow==13.0.0
-PyYAML==6.0.3
+# Runtime dependencies. 
+# TODO: The app is stdlib-only right now, uncomment packages as they're needed
+# mutagen==1.48.1
+# pillow==13.0.0
+# PyYAML==6.0.3
