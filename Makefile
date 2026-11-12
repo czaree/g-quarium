@@ -22,7 +22,7 @@ test:
 	$(VENV_PY) -m pytest -q
 
 lint:
-	$(VENV_PY) -m ruff check .
+	$(VENV_PY) -m ruff check . --fix
 
 build:
 	docker build --build-arg GIT_SHA=$(SHA) -t $(IMAGE):dev .

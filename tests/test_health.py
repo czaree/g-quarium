@@ -9,6 +9,7 @@ from app.config import Settings
 from app.main import create_server, get_version
 from app.manager import Manager
 
+
 @pytest.fixture
 def base_url(tmp_path):
     # empty library; nothing is streamed
