@@ -11,7 +11,7 @@ from app.config import Settings
 from app.library import Track
 from app.timeline import Timeline
 
-log = logging.getLogger("aquarium-radio.scene")
+log = logging.getLogger("g-quarium.scene")
 
 FADE_S = 1.0
 IMAGE_EXTS = {".png", ".jpg", ".jpeg", ".webp"}

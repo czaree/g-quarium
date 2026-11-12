@@ -1,6 +1,6 @@
 # Local development: software encode, sample music, live code mount.
 services:
-  q-quarium:
+  g-quarium:
     build:
       context: .
       args:
