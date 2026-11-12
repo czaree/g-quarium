@@ -14,4 +14,16 @@ g-quarium is configured for local testing in a dev environment.
 ```bash
 make setup
 ```
-2. 
+2. run the unit tests
+```bash
+make test
+```
+
+3. launch the docker container locally
+    * if running from windows, launch Docker Desktop first! Otherwise, you'll get a "open //./pipe/dockerDesktopLinuxEngine: system cannot find file specified" error
+```bash
+make dev
+```
+
+4. check [http://localhost:8080/health](http://localhost:8080/health) on your local machine and confirm it reports "ok" for status, and "dev" for version
+    * Plug the url into the browser, or use a curl command to send a GET 
