@@ -1,7 +1,7 @@
 FROM ubuntu:24.04
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-        ffmpeg intel-media-va-driver vainfo python3 python3-venv curl \
+        ffmpeg intel-media-va-driver vainfo python3 python3-venv curl fonts-dejavu-core fonts-noto-cjk \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /srv
