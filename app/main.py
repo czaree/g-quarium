@@ -23,7 +23,7 @@ def get_version() -> str:
     return os.environ.get("APP_VERSION", "dev")[:7]
 
 
-def health_payload() -> dict:
+def health_payload(manager: Manager) -> dict:
     """
     reports the service's health. only fails if the process/HTTP server is down.
 
@@ -34,8 +34,7 @@ def health_payload() -> dict:
         "status": "ok",
         "version": get_version(),
         "pipeline": "idle",
-        "tracks": 0,
-        "clients": 0,
+        **manager.status()
     }
 
 
@@ -49,7 +48,7 @@ class Handler(BaseHTTPRequestHandler):
     def do_GET(self) -> None:
         path = self.path.split("?", 1)[0]
         if path == "/health":
-            self._send_json(200, health_payload())
+            self._send_json(200, health_payload(self.manager))
         elif path == "/now-playing":
             track = self.manager.now_playing()
             body = {"playing": track is not None}

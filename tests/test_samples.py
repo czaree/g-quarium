@@ -17,5 +17,5 @@ def test_sample_library_is_not_empty():
 def test_samples_are_decodable_audio():
     for path in audio_files():
         audio = File(path)  # no tags needed, just a parseable audio file
-        assert audio is not None, f"mutagen cannot parse {path.name}"
+        assert audio is not None, f"cannot parse {path.name}"
         assert audio.info.length > 0, f"{path.name} has zero length"
