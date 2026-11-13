@@ -1,5 +1,4 @@
-# Runtime dependencies. 
-# TODO: The app is stdlib-only right now, uncomment packages as they're needed
+# Runtime dependencies (exact versions).
 mutagen==1.48.1
 pillow==13.0.0
-# PyYAML==6.0.3
+PyYAML==6.0.3

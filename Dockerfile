@@ -12,7 +12,7 @@ RUN python3 -m venv /opt/venv \
 ENV PATH=/opt/venv/bin:$PATH \
     PYTHONUNBUFFERED=1
 
-COPY app ./app
+COPY gquarium ./gquarium
 
 # Put late so code changes don't bust the dependency layers above.
 ARG GIT_SHA=dev
@@ -23,4 +23,4 @@ EXPOSE 8080
 HEALTHCHECK --interval=30s --timeout=5s --start-period=15s \
     CMD curl -fsS http://localhost:8080/health || exit 1
 
-CMD ["python", "-m", "app.main"]
+CMD ["python", "-m", "gquarium"]
