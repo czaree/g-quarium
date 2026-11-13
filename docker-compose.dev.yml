@@ -10,10 +10,11 @@ services:
     environment:
       - ENCODER=software
       - SCENE=static
+      - APP_NAME=g-quarium
       - IDLE_GRACE_S=10
       - LOG_LEVEL=debug
     volumes:
       - ./samples/music:/music:ro
       - ./config:/config
       - ./assets:/assets
-      - ./app:/srv/app:ro   # edit app code without rebuilding (restart the container to apply)
+      - ./gquarium:/srv/gquarium:ro   # edit app code without rebuilding (restart the container to apply)

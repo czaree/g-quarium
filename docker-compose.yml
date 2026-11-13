@@ -1,5 +1,5 @@
 # Server deployment: pulls the image published by CI.
-# Replace OWNER with your lowercase GitHub username. Set RENDER_GID in a .env file
+# Set RENDER_GID in a .env file
 # next to this file (find it with: getent group render).
 services:
   g-quarium:
@@ -16,7 +16,8 @@ services:
       - ENCODER=vaapi
       - SCENE=static
       - IDLE_GRACE_S=30
-      - NOW_PLAYING_DELAY_S=5
+      - NOW_PLAYING_DELAY_S=0
+      - APP_NAME=g-quarium
     volumes:
       - /media/jellyfin/Music:/music:ro
       - ./config:/config

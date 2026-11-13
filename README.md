@@ -1,29 +1,47 @@
 # g-quarium
-On-Demand livestream with custom music and aquarium background for use with Jellyfin Live TV.
 
-## How To Install
+An always-available Jellyfin Live TV channel that plays a curated random mix of music from your
+existing library with a now-playing overlay. It runs headless in Docker, streams only while someone is watching, and can use VAAPI hardware encoding.
 
-## Testing Locally
-g-quarium is configured for local testing in a dev environment.
+## Use it on a server
 
-### Requirements
-1. `make` and `cmake` must be installed in order to set up the venv that installs the rest of the requirements
+Requirements: a Linux x86-64 host with Docker and Compose v2, a readable music folder, and
+optionally an Intel iGPU with VAAPI (software encoding otherwise).
 
-### How To Run
-1. Set up the virtual environment to install the needed dependencies (see [requirements.txt](./requirements.txt) and [requirements-dev.txt](./requirements-dev.txt) for a full list of what will be installed)
 ```bash
-make setup
-```
-2. run the unit tests
-```bash
-make test
+# docker-compose.yml expects RENDER_GID in a .env file next to it (see docs/install.md)
+docker compose pull && docker compose up -d
+curl http://localhost:8080/health
 ```
 
-3. launch the docker container locally
-    * if running from windows, launch Docker Desktop first! Otherwise, you'll get a "open //./pipe/dockerDesktopLinuxEngine: system cannot find file specified" error
+Then open `http://<server>:8080/stream.ts` in VLC. Details: [install](docs/install.md) and
+[configuration](docs/configuration.md).
+
+## Run it locally
+
+Prerequisites: Python 3.12, Docker (Desktop on Windows/macOS, with Linux containers) and `make`.
+
 ```bash
-make dev
+make setup      # create .venv and install pinned dependencies
+make test       # unit tests (fast, no ffmpeg or Docker needed)
+make dev        # build and run in Docker with software encoding and sample music
 ```
 
-4. check [http://localhost:8080/health](http://localhost:8080/health) on your local machine and confirm it reports "ok" for status, and "dev" for version
-    * Plug the url into the browser, or use a curl command to send a GET 
+Check `http://localhost:8080/health` reports `"status": "ok"` and `"version": "dev"`, then open
+`http://localhost:8080/stream.ts` in VLC. More in [development](docs/development.md).
+
+## Project layout
+
+| Folder | Contents |
+| --- | --- |
+| `gquarium/` | the application (Python package, see [architecture](docs/architecture.md)) |
+| `tests/` | `unit/` (mirrors the package tree) and `integration/` (real ffmpeg and sockets) |
+| `docs/` | install, configuration, development, workflows, architecture |
+| `config/` | example `sources.yml` and `settings.yml` |
+| `assets/` | `backgrounds/`, `fonts/`, `fish/` (mounted into the container) |
+| `samples/` | small music library used by the dev setup and tests |
+| `.github/workflows/` | CI ([workflows](docs/workflows.md)) |
+
+Docs index: [install](docs/install.md) · [configuration](docs/configuration.md) ·
+[development](docs/development.md) · [workflows](docs/workflows.md) ·
+[architecture](docs/architecture.md)
